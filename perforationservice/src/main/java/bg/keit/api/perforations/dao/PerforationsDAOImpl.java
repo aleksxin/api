@@ -1,6 +1,6 @@
 package bg.keit.api.perforations.dao;
 
-import bg.keit.perforations.domain.Perforations;
+import bg.keit.api.perforations.domain.Perforations;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 

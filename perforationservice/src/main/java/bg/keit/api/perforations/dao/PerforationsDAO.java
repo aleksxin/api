@@ -1,6 +1,6 @@
 package bg.keit.api.perforations.dao;
 
-import bg.keit.perforations.domain.Perforations;
+import bg.keit.api.perforations.domain.Perforations;
 
 import java.util.Date;
 import java.util.List;

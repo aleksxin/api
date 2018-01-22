@@ -1,7 +1,7 @@
 package bg.keit.api.perforations.rest;
 
-import bg.keit.perforations.check.service.PerforationsService;
-import bg.keit.perforations.domain.Perforations;
+import bg.keit.api.perforations.service.PerforationSevice;
+import bg.keit.api.perforations.domain.Perforations;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -15,7 +15,7 @@ import javax.ws.rs.QueryParam;
 public class CheckPerforations {
 
 	@Inject
-	PerforationsService checkPerfService;// = new EncryptedMarkReader(getClass().getClassLoader().getResourceAsStream("SecreadParamsLogo.xml"),getClass().getClassLoader().getResourceAsStream("secmark.xml"));
+	PerforationSevice checkPerfService;// = new EncryptedMarkReader(getClass().getClassLoader().getResourceAsStream("SecreadParamsLogo.xml"),getClass().getClassLoader().getResourceAsStream("secmark.xml"));
 
 	@GET
 	@Path("/")
