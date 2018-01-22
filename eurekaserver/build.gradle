@@ -1,32 +1,27 @@
-
 buildscript {
     ext {
-        springBootVersion = '2.0.0.M1'
-
+        springBootVersion = '2.0.0.M7'
     }
     repositories {
-        maven {
-            mavenCentral()
-            maven { url 'https://repo.spring.io/libs-snapshot' }
-            url "https://plugins.gradle.org/m2/"
-        }
+        mavenCentral()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
     }
     dependencies {
-
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
 
-
-
-
-group 'bg.keit.api'
-version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: "io.spring.dependency-management"
+
+group 'bg.keit.api'
+version '1.0-SNAPSHOT'
+
+
 
 
 jar {
@@ -38,25 +33,25 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 repositories {
     mavenCentral()
-
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
 }
 
 
-
-dependencyManagement {
-    imports {
-        mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Camden.SR7'
-    }
+ext {
+    springCloudVersion = 'Finchley.M5'
 }
+
 dependencies {
-//    compile ('org.springframework.boot:spring-boot-starter-web')
-    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-eureka-server'
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile('org.springframework.cloud:spring-cloud-starter-config')
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-server')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
-repositories {
-    maven {
-        url 'https://repo.spring.io/libs-snapshot'
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
     }
 }
 
