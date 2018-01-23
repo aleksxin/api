@@ -2,4 +2,6 @@ rootProject.name = 'projmain'
 include 'eurekaserver'
 include 'mobileclient'
 include 'perforationservice'
+include 'datamodels:Perforations-model'
+findProject(':datamodels:Perforations-model')?.name = 'Perforations-model'
 
