@@ -1,12 +1,12 @@
 package bg.keit.api.perforations.rest;
 
-import bg.keit.api.perforations.service.ListPerforationService;
-import bg.keit.api.perforations.domain.Perforations;
 
-import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import bg.keit.api.perforations.service.ListPerforationService;
+import bg.keit.model.domain.Perforations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
@@ -20,15 +20,15 @@ import java.util.zip.ZipOutputStream;
 //import bg.keit.perforaitons.check.service.perforationsServiceHibernateImpl;
 
 
-@Path("/")
+@RestController
 public class ListPerforations {
 
-	@Inject
+	@Autowired
 	ListPerforationService listPerfService;// = new EncryptedMarkReader(getClass().getClassLoader().getResourceAsStream("SecreadParamsLogo.xml"),getClass().getClassLoader().getResourceAsStream("secmark.xml"));
 
-	@GET
-	@Path("/update")
-	@Produces("application/json")
+	//@GET
+	@RequestMapping("/update")
+	//@Produces("application/json")
 	//@Path("/check")
 	
 	public Response convertCtoF(@QueryParam("tm") long timeStampValue) {
@@ -125,9 +125,9 @@ public class ListPerforations {
 	}
 	
 
-	@GET
-	@Path("/get")
-	@Produces("text/plain")
+	//@GET
+	@RequestMapping("/get")
+	//@Produces("text/plain")
 	public Response getFile(@QueryParam("tm") long timeStampValue) {
 
 		StringBuilder sb = new StringBuilder();

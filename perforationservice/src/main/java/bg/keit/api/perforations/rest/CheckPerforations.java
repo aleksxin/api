@@ -1,25 +1,24 @@
 package bg.keit.api.perforations.rest;
 
 import bg.keit.api.perforations.service.PerforationSevice;
-import bg.keit.api.perforations.domain.Perforations;
+import bg.keit.model.domain.Perforations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 //import bg.keit.perforaitons.check.service.perforationsServiceHibernateImpl;
 
 
-@Path("/")
+@RestController
 public class CheckPerforations {
 
-	@Inject
+	@Autowired
 	PerforationSevice checkPerfService;// = new EncryptedMarkReader(getClass().getClassLoader().getResourceAsStream("SecreadParamsLogo.xml"),getClass().getClassLoader().getResourceAsStream("secmark.xml"));
 
-	@GET
-	@Path("/")
-	@Produces("application/json")
+	//@GET
+	@RequestMapping("/")
+	//@Produces("application/json")
 	//@Path("/check")
 	
 	public String convertCtoF(@QueryParam("s") Integer Serial, @QueryParam("c") String EncCode, @QueryParam("t") int rtype) {

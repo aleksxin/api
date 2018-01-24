@@ -61,4 +61,11 @@ public class JobsId implements java.io.Serializable {
 		return result;
 	}
 
+	@java.lang.Override
+	public java.lang.String toString() {
+		return "JobsId{" +
+				"machineId='" + machineId + '\'' +
+				", jobId=" + jobId +
+				'}';
+	}
 }

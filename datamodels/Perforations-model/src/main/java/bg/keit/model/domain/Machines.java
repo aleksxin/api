@@ -64,4 +64,15 @@ public class Machines implements java.io.Serializable {
 		this.jobses = jobses;
 	}*/
 
+
+
+	@java.lang.Override
+	public java.lang.String toString() {
+		return "Machines{" +
+				"machineId='" + machineId + '\'' +
+				", describtion='" + describtion + '\'' +
+				'}';
+	}
+
+
 }

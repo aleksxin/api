@@ -135,4 +135,17 @@ public class Perforations implements java.io.Serializable {
 		return retOCR.toString();
 	}
 
+	@java.lang.Override
+	public java.lang.String toString() {
+		return "Perforations{" +
+				"id=" + id +
+				", jobs=" + jobs +
+				", machines=" + machines +
+				", encryptionCode='" + encryptionCode + '\'' +
+				", executionDate=" + executionDate +
+				", executionTime=" + executionTime +
+				", executionUser='" + executionUser + '\'' +
+				", importDatetime=" + importDatetime +
+				'}';
+	}
 }

@@ -39,7 +39,7 @@ public class Jobs implements java.io.Serializable {
 	private byte[] snFont;
 	@Column(name = "MARK_SN")
 	private Short markSn;
-	@OneToMany(mappedBy="id")
+	@OneToMany(mappedBy="jobs", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private Set<Perforations> perforationses = new HashSet<Perforations>(0);
 
 	public Jobs() {
@@ -184,4 +184,23 @@ public class Jobs implements java.io.Serializable {
 		this.perforationses = perforationses;
 	}
 
+	@java.lang.Override
+	public java.lang.String toString() {
+		return "Jobs{" +
+				"id=" + id +
+				", machines=" + machines +
+				", jobName='" + jobName + '\'' +
+				", keyVector='" + keyVector + '\'' +
+				", encryptionKey=" + java.util.Arrays.toString(encryptionKey) +
+				", batchNumber='" + batchNumber + '\'' +
+				", markBatch=" + markBatch +
+				", batchFont=" + java.util.Arrays.toString(batchFont) +
+				", snPrefix='" + snPrefix + '\'' +
+				", snSufix='" + snSufix + '\'' +
+				", snLength=" + snLength +
+				", snFont=" + java.util.Arrays.toString(snFont) +
+				", markSn=" + markSn +
+				", perforationses=" + perforationses +
+				'}';
+	}
 }

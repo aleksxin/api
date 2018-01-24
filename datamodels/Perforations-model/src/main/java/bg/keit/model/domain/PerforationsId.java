@@ -64,8 +64,8 @@ public class PerforationsId implements java.io.Serializable {
 				&& (this.getJobId() == castOther.getJobId()) && (this.getSerialNumber() == castOther.getSerialNumber());
 	}
 
-	public int hashCode() {
-		int result = 17;
+		public int hashCode() {
+			int result = 17;
 
 		result = 37 * result + (getMachineId() == null ? 0 : this.getMachineId().hashCode());
 		result = 37 * result + this.getJobId();
@@ -73,4 +73,12 @@ public class PerforationsId implements java.io.Serializable {
 		return result;
 	}
 
+	@java.lang.Override
+	public java.lang.String toString() {
+		return "PerforationsId{" +
+				"machineId='" + machineId + '\'' +
+				", jobId=" + jobId +
+				", serialNumber=" + serialNumber +
+				'}';
+	}
 }

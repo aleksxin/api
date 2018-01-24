@@ -1,6 +1,7 @@
 package bg.keit.api.perforations.service;
 
-import bg.keit.api.perforations.domain.Perforations;
+
+import bg.keit.model.domain.Perforations;
 
 public interface PerforationSevice {
     Perforations findByJobID(int i);
