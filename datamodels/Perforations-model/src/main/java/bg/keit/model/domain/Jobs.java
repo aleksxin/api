@@ -15,7 +15,7 @@ public class Jobs implements java.io.Serializable {
 	@EmbeddedId
 	private JobsId id;
 	@ManyToOne
-	@JoinColumn(name="MACHINE_ID" ,nullable = false)
+	@JoinColumn(name="MACHINE_ID" ,nullable = false, insertable = false, updatable = false)
 	private Machines machines;
 	@Column(name = "JOB_NAME", nullable = false, length =4000)
 	private String jobName;

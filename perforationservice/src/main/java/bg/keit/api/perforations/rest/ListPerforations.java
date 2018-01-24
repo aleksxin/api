@@ -5,6 +5,7 @@ import bg.keit.api.perforations.service.ListPerforationService;
 import bg.keit.model.domain.Perforations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.ws.rs.QueryParam;
@@ -27,11 +28,11 @@ public class ListPerforations {
 	ListPerforationService listPerfService;// = new EncryptedMarkReader(getClass().getClassLoader().getResourceAsStream("SecreadParamsLogo.xml"),getClass().getClassLoader().getResourceAsStream("secmark.xml"));
 
 	//@GET
-	@RequestMapping("/update")
+	@RequestMapping(value="/update")
 	//@Produces("application/json")
 	//@Path("/check")
 	
-	public Response convertCtoF(@QueryParam("tm") long timeStampValue) {
+	public Response convertCtoF(@RequestParam("tm") long timeStampValue) {
 		String resp="";
         try
         {
@@ -126,9 +127,9 @@ public class ListPerforations {
 	
 
 	//@GET
-	@RequestMapping("/get")
+	@RequestMapping(value="/get")
 	//@Produces("text/plain")
-	public Response getFile(@QueryParam("tm") long timeStampValue) {
+	public Response getFile(@RequestParam("tm") long timeStampValue) {
 
 		StringBuilder sb = new StringBuilder();
 		sb.append("Test String");

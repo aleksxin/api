@@ -4,6 +4,7 @@ import bg.keit.api.perforations.service.PerforationSevice;
 import bg.keit.model.domain.Perforations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.ws.rs.QueryParam;
@@ -17,11 +18,11 @@ public class CheckPerforations {
 	PerforationSevice checkPerfService;// = new EncryptedMarkReader(getClass().getClassLoader().getResourceAsStream("SecreadParamsLogo.xml"),getClass().getClassLoader().getResourceAsStream("secmark.xml"));
 
 	//@GET
-	@RequestMapping("/")
+	@RequestMapping(value="/")
 	//@Produces("application/json")
 	//@Path("/check")
 	
-	public String convertCtoF(@QueryParam("s") Integer Serial, @QueryParam("c") String EncCode, @QueryParam("t") int rtype) {
+	public String convertCtoF(@RequestParam(value="s", required=false) Integer Serial, @RequestParam(value="c", required=false) String EncCode, @RequestParam(value="t") int rtype) {
 		String resp="Invalid request";
         try
         {

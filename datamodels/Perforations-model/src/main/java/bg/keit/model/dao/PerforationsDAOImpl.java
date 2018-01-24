@@ -3,6 +3,7 @@ package bg.keit.model.dao;
 import bg.keit.model.domain.Perforations;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -33,25 +34,49 @@ public class PerforationsDAOImpl implements PerforationsDAO{
     
     @Override
     public Perforations findByJobID(int job_id){
-    	return (Perforations)entityManager.createQuery(
+        Perforations perf = null;
+        try {
+            perf = (Perforations)entityManager.createQuery(
                 "from Perforations p where p.id.jobId = :pid")
                     .setParameter("pid", job_id)
                     .getSingleResult();
+            }
+            catch (Exception e){
+                LoggerFactory.getLogger(this.getClass()).info(e.getMessage());
+            }
+
+    	return perf;
     }
     
     @Override
     public Perforations findBySerNumberAndEncCode(Integer serial, String code){
-    	return (Perforations)entityManager.createQuery("from Perforations p where p.id.serialNumber=:ser and p.encryptionCode = :enc")
-                .setParameter("ser", serial)
-                .setParameter("enc", code)
-                .getSingleResult();
+        Perforations perf = null;
+        try {
+            perf = (Perforations)entityManager.createQuery("from Perforations p where p.id.serialNumber=:ser and p.encryptionCode = :enc")
+                    .setParameter("ser", serial)
+                    .setParameter("enc", code)
+                    .getSingleResult();
+        }
+        catch (Exception e){
+            LoggerFactory.getLogger(this.getClass()).info(e.getMessage());
+        }
+
+    	return perf;
     }
     
     @Override
     public Perforations findByEncCode(String code){
-    	return (Perforations)entityManager.createQuery("from Perforations p where p.encryptionCode = :enc")
-                .setParameter("enc", code)
-                .getSingleResult();
+        Perforations perf = null;
+        try {
+            perf = (Perforations) entityManager.createQuery("from Perforations p where p.encryptionCode = :enc")
+                    .setParameter("enc", code)
+                    .getSingleResult();
+        }
+        catch (Exception e){
+            LoggerFactory.getLogger(this.getClass()).info(e.getMessage());
+        }
+
+        return perf;
     }
     
     @Override
