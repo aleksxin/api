@@ -1,7 +1,9 @@
 rootProject.name = 'projmain'
 include 'eurekaserver'
-include 'mobileclient'
-include 'perforationservice'
+include 'clientadapters:mobileclient'
+findProject(':clientadapters:mobileclient')?.name = 'mobileclient'
+include 'services:perforationservice'
+findProject(':services:perforationservice')?.name = 'perforationservice'
 include 'datamodels:Perforations-model'
 findProject(':datamodels:Perforations-model')?.name = 'Perforations-model'
 
