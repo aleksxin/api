@@ -6,4 +6,8 @@ include 'services:perforationservice'
 findProject(':services:perforationservice')?.name = 'perforationservice'
 include 'datamodels:Perforations-model'
 findProject(':datamodels:Perforations-model')?.name = 'Perforations-model'
+include 'datamodels:response-message'
+findProject(':datamodels:response-message')?.name = 'response-message'
+include 'services:messages-service'
+findProject(':services:messages-service')?.name = 'messages-service'
 
