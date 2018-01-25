@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.ws.rs.QueryParam;
 //import bg.keit.perforaitons.check.service.perforationsServiceHibernateImpl;
 
 
@@ -79,7 +77,8 @@ public class CheckPerforations {
     }finally{
       //  session.close();
     }
-        return "{\nresponse:"+resp+"\n}";
+      // return "{\nresponse:"+resp+"\n}";
+		return resp;
 
        
 	}

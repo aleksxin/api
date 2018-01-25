@@ -1,22 +1,19 @@
 package bg.keit.model.message.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.io.Serializable;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "messages")
 public class ResponseMessage implements java.io.Serializable {
     @Id
+
     long id;
-    @Column (nullable = false)
+    @Column (nullable = false,unique = true)
     int code;
     @Column (nullable = false)
     String message;
-    @Column (nullable = false)
+    @Column (name="message_text",nullable = false)
     String value;
 
     public long getId() {

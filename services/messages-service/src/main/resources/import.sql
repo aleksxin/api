@@ -1,0 +1,5 @@
+set term ^ ;
+EXECUTE BLOCK AS BEGIN
+INSERT INTO messages(ID,CODE,MESSAGE,MESSAGE_TEXT) VALUES(1,200,'Code is valid','true');
+INSERT INTO messages(ID,CODE,MESSAGE,MESSAGE_TEXT) VALUES(2,302,'Code is invalid','false');
+END^

@@ -1,12 +1,5 @@
 
 
-
-//plugins { id "io.spring.dependency-management" version "1.0.4.RELEASE" }
-
-//apply plugin: 'java'
-//apply plugin: 'idea'
-apply plugin: 'io.spring.dependency-management'
-
 jar {
     baseName = 'perforations-model'
     version = '0.0.1-SNAPSHOT'
@@ -15,25 +8,3 @@ jar {
 //group 'bg.keit.api'
 version '1.0-SNAPSHOT'
 
-
-
-
-//sourceCompatibility = 1.8
-
-//repositories {
-//    mavenCentral()
-
-  //      maven { url "https://repo.spring.io/snapshot" }
- //       maven { url "https://repo.spring.io/milestone" }
-//}
-
-
-dependencies {
-    compile('org.springframework.boot:spring-boot-starter-data-jpa')
-
-   // testCompile group: 'junit', name: 'junit', version: '4.12'
-}
-
-dependencyManagement {
-    imports { mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}") }
-}
