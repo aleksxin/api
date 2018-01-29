@@ -36,5 +36,7 @@ subprojects {
     ext {
         springCloudVersion = 'Finchley.M5'
     }
+
+
 }
 
