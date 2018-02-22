@@ -1,4 +1,15 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.hidetake:gradle-ssh-plugin:2.9.0'
+    }
+}
 
+plugins {
+    id 'org.hidetake.ssh' version '2.9.0'
+}
 apply plugin: 'org.springframework.boot'
 apply plugin: "io.spring.dependency-management"
 apply plugin: "application"
@@ -6,18 +17,45 @@ apply plugin: "nebula.ospackage"
 
 
 group 'bg.keit.api'
-version '1.0-SNAPSHOT'
+version '1.0'
 
-
+mainClassName = "bg.keit.api.eureka.EurekaServerApp"
 
 
 jar {
-    baseName = 'eureka-service'
-    version = '0.0.1-SNAPSHOT'
+//    baseName = 'eureka-service'
+//    version = '0.0.1'
+    enabled=true
 }
 
 
 
+remotes {
+    webServer {
+        host = '192.168.101.107'
+        user = 'alexi'
+        password ="MOKSD"
+
+    }
+}
+ssh.settings {
+    knownHosts = allowAnyHosts
+}
+task deploy {
+    doLast {
+        ssh.run {
+            session(remotes.webServer) {
+                // Execute a command
+             //   def result = execute 'sudo service httpd status'
+
+                // Any Gradle methods or properties are available in a session closure
+                put from: 'build\\distributions\\eurekaserver_1.0-1_amd64.deb', into: '/home/alexi/webapps'
+
+            }
+
+        }
+    }
+}
 
 
 dependencies {
@@ -33,13 +71,26 @@ dependencyManagement {
     }
 }
 
+bootJar{
+ //   classifier='boot'
+}
+startScripts{
+
+    libsDirName='lib/keitapi'
+}
+bootStartScripts{
+    libsDirName='lib/keitapi'
+}
+
+
 
 ospackage {
-    packageName = 'foo'
-    version = '1.2.3'
+   // packageName = 'foo'
+   // version = '1.2.3'
     release = '1'
-    arch = I386
+    arch = 'amd64'
     os = LINUX
+    type = BINARY
 
    // installUtils file('scripts/rpm/utils.sh')
  //   preInstall file('scripts/rpm/preInstall.sh')
@@ -47,27 +98,29 @@ ospackage {
   //  preUninstall 'touch /tmp/myfile'
   //  postUninstall file('scripts/rpm/postUninstall.sh')
 
-    requires('qux')
+    requires('openjdk-8-jre')
 
-    into '/opt/foo'
+    into '/usr/local'
+    user "root"
+    permissionGroup "root"
 
     from(jar.outputs.files) {
-        into 'lib'
+        into 'lib/keitapi'
     }
     from(configurations.runtime) {
-        into 'lib'
+        into 'lib/keitapi'
     }
     from('lib') {
         into 'lib'
     }
-    from('scripts') {
+    from('build/bootScripts') {
         into 'bin'
         exclude 'database'
-        fileMode = 0550
+        fileMode = 0755
     }
     from('src/main/resources') {
         fileType CONFIG | NOREPLACE
-        into 'conf'
+        into '/etc/keitapi'
     }
     from('home') {
         // Creating directory entries (or not) in the RPM is normally left up to redline-rpm library.
@@ -92,8 +145,12 @@ buildRpm {
 }
 
 buildDeb {
-    requires('bat', '1.0.1')
-    link('/etc/init.d/foo', '/opt/foo/bin/foo.upstart')
+   // requires('bat', '1.0.1')
+   // link('/etc/init.d/foo', '/opt/foo/bin/foo.upstart')
+}
+
+startScripts{
+
 }
 
 
