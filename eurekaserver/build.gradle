@@ -26,6 +26,9 @@ jar {
 //    baseName = 'eureka-service'
 //    version = '0.0.1'
     enabled=true
+    manifest {
+        attributes 'Main-Class': 'bg.keit.api.eureka.EurekaServerApp'
+    }
 }
 
 
@@ -34,7 +37,7 @@ remotes {
     webServer {
         host = '192.168.101.107'
         user = 'alexi'
-        password ="MOKSD"
+        password ="MONJOH"
 
     }
 }
@@ -149,8 +152,9 @@ buildDeb {
    // link('/etc/init.d/foo', '/opt/foo/bin/foo.upstart')
 }
 
-startScripts{
-
+startScripts {
+    classpath += files { file("lib/keitapi").listFiles() }
 }
+
 
 
