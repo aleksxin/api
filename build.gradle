@@ -1,30 +1,65 @@
-subprojects {
-    ext {
-        springBootVersion = '2.0.0.RC1'
-    }
+
+    ext.springBootVersion = '2.0.0.RC2'
+
     buildscript {
 
         repositories {
+            jcenter()
             mavenCentral()
             maven { url "https://repo.spring.io/snapshot" }
             maven { url "https://repo.spring.io/milestone" }
             maven { url "https://plugins.gradle.org/m2/" }
+
         }
         dependencies {
-            classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+            classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.0.RC2")
 
             classpath "com.netflix.nebula:gradle-ospackage-plugin:4.6.0"
+            classpath "org.hidetake:gradle-ssh-plugin:2.9.0"
 
         }
     }
 
-    group 'bg.keit.api'
+subprojects {
+
+
+
+    apply plugin: 'org.hidetake.ssh'
     apply plugin: 'java'
     apply plugin: 'idea'
   //  apply plugin: 'io.spring.dependency-management'
-
+    group 'bg.keit.api'
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
+
+    remotes {
+        webServer {
+            host = "${sshhost}"
+            user = "${sshuser}"
+            password ="${sshpassw}"
+
+        }
+    }
+    ssh.settings {
+        knownHosts = allowAnyHosts
+    }
+
+
+    task deployToServer {
+        doLast {
+            ssh.run {
+                session(remotes.webServer) {
+                    // Execute a command
+                    //   def result = execute 'sudo service httpd status'
+
+                    // Any Gradle methods or properties are available in a session closure
+                    put from: 'build\\distributions\\', into: "/home/${sshuser}"
+
+                }
+
+            }
+        }
+    }
 
     repositories {
         mavenCentral()
@@ -38,8 +73,10 @@ subprojects {
     }
 
     ext {
-        springCloudVersion = 'Finchley.M6'
+        springCloudVersion = 'Finchley.M7'
     }
+
+
 
 
 }

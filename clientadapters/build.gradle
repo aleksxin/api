@@ -4,7 +4,16 @@ subprojects {
 
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
+    apply plugin: "application"
+    apply plugin: "nebula.ospackage"
 
+
+
+
+    jar {
+        enabled=true
+
+    }
 
     sourceCompatibility = 1.8
 
@@ -29,6 +38,77 @@ subprojects {
         }
     }
 
+    ospackage {
+        // packageName = 'foo'
+        // version = '1.2.3'
+        release = '1'
+        arch = 'amd64'
+        os = LINUX
+        type = BINARY
+
+        // installUtils file('scripts/rpm/utils.sh')
+        //   preInstall file('scripts/rpm/preInstall.sh')
+        //   postInstall file('scripts/rpm/postInstall.sh')
+        //  preUninstall 'touch /tmp/myfile'
+        //  postUninstall file('scripts/rpm/postUninstall.sh')
+
+        requires('openjdk-8-jre')
+
+        into '/usr/local'
+        user "root"
+        permissionGroup "root"
+
+        from(jar.outputs.files) {
+            into 'lib/keitapi'
+        }
+        from(configurations.runtime) {
+            into 'lib/keitapi'
+        }
+        from('lib') {
+            into 'lib'
+        }
+        from('build/scripts') {
+            into 'bin'
+            exclude 'database','*.bat'
+            fileMode = 0755
+        }
+        from('src/main/resources') {
+            fileType CONFIG | NOREPLACE
+            into '/etc/keitapi'
+        }
+        from('home') {
+            // Creating directory entries (or not) in the RPM is normally left up to redline-rpm library.
+            // Use this to explicitly create an entry -- for setting directory fileMode on system directories.
+            createDirectoryEntry = true
+            fileMode = 0500
+            into 'home'
+        }
+        from('endorsed') {
+            // Will tell redline-rpm not to auto create directories, which
+            // is sometimes necessary to avoid rpm directory conflicts
+            addParentDirs = false
+            into '/usr/share/tomcat/endorsed'
+        }
+
+    }
+
+    buildRpm {
+        requires('bar', '2.2', GREATER | EQUAL)
+        requires('baz', '1.0.1', LESS)
+        link('/etc/init.d/foo', '/opt/foo/bin/foo.init')
+    }
+
+    buildDeb {
+        // requires('bat', '1.0.1')
+        // link('/etc/init.d/foo', '/opt/foo/bin/foo.upstart')
+    }
+
+    startScripts {
+        doLast {
+            unixScript.text = unixScript.text.replace('lib/', 'lib/keitapi/')
+            windowsScript.text = windowsScript.text.replace('lib/', 'lib/keitapi/')
+        }
+    }
 
 
 

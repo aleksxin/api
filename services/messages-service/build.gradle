@@ -1,12 +1,15 @@
 
-version '1.0-SNAPSHOT'
+version '1.0'
 
 
-
+mainClassName = "bg.keit.api.MessagesApp"
 
 jar {
-    baseName = 'message-eureka-client'
-    version = '0.0.1-SNAPSHOT'
+ //   manifest {
+ //       attributes 'Main-Class': 'bg.keit.api.MessagesApp'
+//    }
+  //  baseName = 'message-eureka-client'
+  //  version = '0.0.1-SNAPSHOT'
 }
 dependencies {
     compile project(':datamodels:response-message')
