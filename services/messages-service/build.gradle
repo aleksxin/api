@@ -5,9 +5,9 @@ version '1.0'
 mainClassName = "bg.keit.api.MessagesApp"
 
 jar {
- //   manifest {
- //       attributes 'Main-Class': 'bg.keit.api.MessagesApp'
-//    }
+   manifest {
+       attributes 'Main-Class': 'bg.keit.api.MessagesApp'
+    }
   //  baseName = 'message-eureka-client'
   //  version = '0.0.1-SNAPSHOT'
 }

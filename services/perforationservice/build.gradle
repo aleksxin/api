@@ -1,13 +1,15 @@
 
 version '1.0'
 
-mainClassName = "bg.keit.api.perforations.EurekaClientApplicaiton"
+mainClassName = "bg.keit.api.perforations.EurekaClientApplication"
 
 jar {
-    //  attributes 'Main-Class': 'bg.keit.api.eureka.EurekaServerApp'
-    //  baseName = 'message-eureka-client'
-    //  version = '0.0.1-SNAPSHOT'
+    manifest {
+        attributes 'Main-Class': 'bg.keit.api.perforations.EurekaClientApplication'
+    }
 }
+
+
 
 dependencies {
     compile project(':datamodels:Perforations-model')

@@ -39,8 +39,6 @@ subprojects {
     }
 
     ospackage {
-        // packageName = 'foo'
-        // version = '1.2.3'
         release = '1'
         arch = 'amd64'
         os = LINUX
@@ -72,7 +70,7 @@ subprojects {
             exclude 'database','*.bat'
             fileMode = 0755
         }
-        from('src/main/resources') {
+        from('dist/config') {
             fileType CONFIG | NOREPLACE
             into '/etc/keitapi'
         }
@@ -99,11 +97,13 @@ subprojects {
     }
 
     buildDeb {
+        dependsOn startScripts
         // requires('bat', '1.0.1')
         // link('/etc/init.d/foo', '/opt/foo/bin/foo.upstart')
     }
 
     startScripts {
+        defaultJvmOpts=["-Dspring.config.additional-location=file:///etc/keitapi/keitapi.properties,file:///etc/keitapi/${jar.baseName}.properties"]
         doLast {
             unixScript.text = unixScript.text.replace('lib/', 'lib/keitapi/')
             windowsScript.text = windowsScript.text.replace('lib/', 'lib/keitapi/')

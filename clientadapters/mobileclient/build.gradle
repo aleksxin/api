@@ -3,3 +3,12 @@ version '1.0-SNAPSHOT'
 
 mainClassName ="bg.keit.client.mobile.MobileClientApp"
 
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'bg.keit.client.mobile.MobileClientApp'
+    }
+    //  baseName = 'message-eureka-client'
+    //  version = '0.0.1-SNAPSHOT'
+}
+

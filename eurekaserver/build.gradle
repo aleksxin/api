@@ -39,18 +39,17 @@ dependencyManagement {
 }
 
 ospackage {
-   // packageName = 'foo'
-   // version = '1.2.3'
-    release = '1'
-    arch = 'amd64'
-    os = LINUX
-    type = BINARY
 
-   // installUtils file('scripts/rpm/utils.sh')
- //   preInstall file('scripts/rpm/preInstall.sh')
- //   postInstall file('scripts/rpm/postInstall.sh')
-  //  preUninstall 'touch /tmp/myfile'
-  //  postUninstall file('scripts/rpm/postUninstall.sh')
+   release = '1'
+        arch = 'amd64'
+        os = LINUX
+        type = BINARY
+
+        // installUtils file('scripts/rpm/utils.sh')
+    //   preInstall file('scripts/rpm/preInstall.sh')
+    //   postInstall file('scripts/rpm/postInstall.sh')
+    //  preUninstall 'touch /tmp/myfile'
+    //  postUninstall file('scripts/rpm/postUninstall.sh')
 
     requires('openjdk-8-jre')
 
@@ -69,10 +68,10 @@ ospackage {
     }
     from('build/scripts') {
         into 'bin'
-        exclude 'database','eurekaserver.bat'
+        exclude 'database','*.bat'
         fileMode = 0755
     }
-    from('src/main/resources') {
+    from('dist/config') {
         fileType CONFIG | NOREPLACE
         into '/etc/keitapi'
     }
@@ -99,11 +98,13 @@ buildRpm {
 }
 
 buildDeb {
+    dependsOn startScripts
    // requires('bat', '1.0.1')
    // link('/etc/init.d/foo', '/opt/foo/bin/foo.upstart')
 }
 
 startScripts {
+    defaultJvmOpts=["-Dspring.config.additional-location=file:///etc/keitapi/keitapi.properties,file:///etc/keitapi/${jar.baseName}.properties"]
     doLast {
         unixScript.text = unixScript.text.replace('lib/', 'lib/keitapi/')
         windowsScript.text = windowsScript.text.replace('lib/', 'lib/keitapi/')

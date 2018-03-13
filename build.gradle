@@ -1,5 +1,5 @@
 
-    ext.springBootVersion = '2.0.0.RC2'
+    ext.springBootVersion = '2.0.0.RELEASE'
 
     buildscript {
 
@@ -12,7 +12,7 @@
 
         }
         dependencies {
-            classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.0.RC2")
+            classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.0.RELEASE")
 
             classpath "com.netflix.nebula:gradle-ospackage-plugin:4.6.0"
             classpath "org.hidetake:gradle-ssh-plugin:2.9.0"
@@ -46,6 +46,7 @@ subprojects {
 
 
     task deployToServer {
+
         doLast {
             ssh.run {
                 session(remotes.webServer) {
@@ -73,7 +74,7 @@ subprojects {
     }
 
     ext {
-        springCloudVersion = 'Finchley.M7'
+        springCloudVersion = 'Finchley.M8'
     }
 
 
