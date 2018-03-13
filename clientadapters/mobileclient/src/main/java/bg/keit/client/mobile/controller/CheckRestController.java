@@ -21,6 +21,7 @@ public class CheckRestController {
     public RespMessage findme(@RequestParam(value="s", required=false) Integer Serial, @RequestParam(value="c", required=false) String EncCode, @RequestParam(value="t") int rtype) {
         RespMessage respMessage = new RespMessage();
         respMessage.setCode(200);
+        //respMessage.setStatus(messagesClient);
         respMessage.setMessage(messagesClient.getFromValue(checkPerforationsClient.convertCtoF(Serial, EncCode, rtype)));
         respMessage.setMessage_date(new Date());
         return respMessage;
