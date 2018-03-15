@@ -24,10 +24,6 @@ subprojects{
     }
 
 
-  //  ext {
-   //     springCloudVersion = 'Finchley.M5'
-   // }
-
     dependencies {
 
         //  compile('org.hibernate:hibernate-c3p0');
@@ -50,11 +46,7 @@ subprojects{
         }
     }
 
-    dependencyManagement {
-        imports {
-            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-        }
-    }
+
 
     ospackage {
         // packageName = 'foo'

@@ -1,8 +1,8 @@
 
-    ext.springBootVersion = '2.0.0.RELEASE'
+
 
     buildscript {
-
+        ext.springBootVersion = '2.0.0.RELEASE'
         repositories {
             jcenter()
             mavenCentral()
@@ -12,7 +12,7 @@
 
         }
         dependencies {
-            classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.0.RELEASE")
+            classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 
             classpath "com.netflix.nebula:gradle-ospackage-plugin:4.6.0"
             classpath "org.hidetake:gradle-ssh-plugin:2.9.0"
